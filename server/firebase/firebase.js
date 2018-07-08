@@ -7,9 +7,13 @@ const admin = require('firebase-admin')
       });
 
 const db = admin.database();
-const ref = db.ref("/table");
+const person = db.ref("/person");
+const address = db.ref("/address")
 // ref.once("value", function(snapshot) {
 //     console.log(snapshot.val());
 // })
 
-module.exports = ref;
+module.exports = {
+    person,
+    address 
+}

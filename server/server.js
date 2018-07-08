@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require ('express')
     ,bodyParser= require('body-parser')
 
-const ref = require ('./firebase/firebase')
+const db = require ('./firebase/firebase')
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,17 +17,18 @@ app.listen(port, ()=> {
 
 })
 
-app.post('/name/:firstname/:lastname', (req,res)=>{
-    // res.send(process.env.POSTMESSAGE);
-    console.log(req.params.firstname);
+app.post('/name/:firstname/:lastname/:address', (req,res)=>{
     var firstname = req.params.firstname;
     var lastname = req.params.lastname;
-    ref.push({
-        person: {
-            firstname: firstname,
-            lastname: lastname
-        }
-    }, console.log("Success"))
+    var address = req.params.address;
+    db.person.push({
+        firstname: firstname,
+        lastname: lastname
+    }, console.log("Person success"))
+
+    db.address.push({
+        address: address
+    }, console.log("Address success"))
 })
 
 app.use('/get', (req,res,next)=> {

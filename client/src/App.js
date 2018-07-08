@@ -7,9 +7,10 @@ class App extends Component {
 constructor(props){
 super(props)
   this.state = {
-    firstname: 'placeholder',
-    lastname: 'placeholder',
-    title: 'Welcome'
+    firstname: '',
+    lastname: '',
+    title: 'Welcome',
+    address: ''
   }
 this.handleChange = this.handleChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,12 +26,7 @@ handleChange(e){
 handleSubmit(e){
   e.preventDefault();
 
-  // const person = {
-  //   firstname: this.state.firstname,
-  //   lastname: this.state.lastname
-  // };
-
-  axios.post(`/name/${this.state.firstname}/${this.state.lastname}`)
+  axios.post(`/name/${this.state.firstname}/${this.state.lastname}/${this.state.address}`)
     .then(res => {
       console.log(res);
     })
@@ -40,8 +36,10 @@ handleSubmit(e){
 
     this.setState({
       firstname: '',
-      lastname: ''
+      lastname: '',
+      address: ''
     })
+
 }
 
   
@@ -63,8 +61,8 @@ handleSubmit(e){
                 type="text" 
                 className="form-control" 
                 name="firstname" 
-                placeholder="First Name"
-                onChange={this.handleChange} />
+                onChange={this.handleChange}
+                value={this.state.firstname} />
             </div>
           <br />
             <div className="form-group">
@@ -73,8 +71,19 @@ handleSubmit(e){
                 type="text" 
                 className="form-control" 
                 name="lastname" 
-                placeholder="Last Name"
-                onChange={this.handleChange}  />
+                onChange={this.handleChange}
+                value={this.state.lastname}  />
+            </div>
+            <br />
+            <div className="form-group">
+            <label className="col-form-label">Address</label>
+            <textarea
+                class="form-control"
+                rows="3" 
+                name="address"
+                value={this.state.address}
+                onChange={this.handleChange}>
+            </textarea>
             </div>
                 <button 
                 type="submit" 
