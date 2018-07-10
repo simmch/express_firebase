@@ -26,7 +26,12 @@ handleChange(e){
 handleSubmit(e){
   e.preventDefault();
 
-  axios.post(`/name/${this.state.firstname}/${this.state.lastname}/${this.state.address}`)
+  const person = {
+    firstname: this.state.firstname,
+    lastname: this.state.lastname
+  }
+
+  axios.post(`/name`, person)
     .then(res => {
       console.log(res);
     })

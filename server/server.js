@@ -17,18 +17,19 @@ app.listen(port, ()=> {
 
 })
 
-app.post('/name/:firstname/:lastname/:address', (req,res)=>{
-    var firstname = req.params.firstname;
-    var lastname = req.params.lastname;
-    var address = req.params.address;
+app.post('/name', (req,res)=>{
+    console.log(req.body);
+    var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+    // var address = req.params.address;
     db.person.push({
         firstname: firstname,
         lastname: lastname
     }, console.log("Person success"))
 
-    db.address.push({
-        address: address
-    }, console.log("Address success"))
+    // db.address.push({
+    //     address: address
+    // }, console.log("Address success"))
 })
 
 app.use('/get', (req,res,next)=> {
